@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap"
+        rel="stylesheet">
+    <title>$PUSH</title>
+
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --text: #ffffff;
+            --muted: #777;
+            --border: #222;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Geist", system-ui, sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: "Geist", system-ui, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* NAV */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            border-bottom: 1px solid var(--border);
+            background: #0a0a0aee;
+            backdrop-filter: blur(4px);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 20px;
+        }
+
+        nav a {
+            font-family: "Geist", system-ui, sans-serif;
+
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        /* NAV LINKS */
+
+        nav .menu {
+            display: flex;
+            gap: 10px;
+        }
+
+        nav .menu a {
+            font-family: monospace;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-decoration: none;
+            color: var(--text);
+
+            border: 1px solid #333;
+            padding: 6px 14px;
+
+            transition: all .2s ease;
+        }
+
+        /* hover */
+
+        nav .menu a:hover {
+            border-color: #fff;
+            background: #fff;
+            color: #000;
+        }
+
+        /* HERO */
+
+        .hero {
+            font-family: "Geist", system-ui, sans-serif;
+
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(5rem, 18vw, 16rem);
+            letter-spacing: -6px;
+        }
+
+        .hero p {
+            margin-top: 10px;
+            color: var(--muted);
+            font-family: monospace;
+        }
+
+        /* BIG WORD BACKGROUND */
+
+        .bgword {
+            position: absolute;
+            font-size: 30vw;
+            font-weight: 900;
+            opacity: 0.04;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        /* SECTION */
+
+        section {
+            border-top: 1px solid var(--border);
+            padding: 120px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .label {
+            font-size: 11px;
+            letter-spacing: 6px;
+            color: var(--muted);
+            margin-bottom: 20px;
+            font-family: monospace;
+        }
+
+        /* TEXT */
+
+        .statement {
+            font-size: clamp(2rem, 6vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 40px;
+        }
+
+        .small {
+            color: var(--muted);
+            font-family: monospace;
+        }
+
+        /* GRID */
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .block {
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+
+        .block h3 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        /* FINAL */
+
+        .final {
+            text-align: center;
+            font-size: clamp(3rem, 10vw, 7rem);
+            letter-spacing: -3px;
+            margin-top: 60px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--muted);
+        }
+
+        /* SPLIT LAYOUT */
+
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .image-holder img {
+            width: 100%;
+            max-width: 450px;
+            display: block;
+            margin: auto;
+        }
+
+        @media (max-width:800px) {
+
+            .split {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        /* GRAIN TEXTURE */
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.05;
+            background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+            z-index: 1000;
+        }
+
+        /* COPY CONTRACT BUTTON */
+
+        .copy-wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .copy-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            border: 1px solid #333;
+            padding: 6px 12px;
+
+            background: transparent;
+            color: #aaa;
+
+            font-family: monospace;
+            font-size: 11px;
+            letter-spacing: 1px;
+
+            cursor: pointer;
+            transition: all .2s ease;
+        }
+
+        .copy-btn:hover {
+            border-color: #fff;
+            color: #fff;
+        }
+
+        .ca-text {
+            max-width: 160px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .copy-label {
+            color: #fff;
+            border-left: 1px solid #333;
+            padding-left: 8px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+
+        <nav>
+
+            <span class="logo-text">PUSH.</span>
+
+            <nav>
+
+
+                <div class="menu">
+                    <a href="#why">WHY</a>
+                    <a href="#narrative">NARRATIVE</a>
+                    <a href="https://twitter.com">X</a>
+                </div>
+
+            </nav>
+            <div class="copy-wrapper">
+
+                <button class="copy-btn" onclick="copyCA()" aria-label="Copy contract address">
+
+                    <span class="ca-text">mB4kwy1WdGYGbBwRGqnBXoHLG9kZJmqCG1oaEAxpump</span>
+
+                    <span class="copy-label">COPY</span>
+
+                </button>
+
+            </div>
+        </nav>
+
+    </header>
+
+
+    <section class="hero">
+
+        <div class="bgword">PUSH</div>
+
+        <h1>PUSH.</h1>
+
+        <p>momentum / pʊʃ / — action under pressure.</p>
+
+        <p style="margin-top:40px;font-size:22px;letter-spacing:6px;">
+            Apply the $PUSH
+        </p>
+
+    </section>
+
+
+    <section id="why">
+
+        <div class="container">
+
+            <div class="label">WHY $PUSH</div>
+
+            <div class="split">
+
+                <div>
+
+                    <div class="statement">
+                        NOT HYPE.<br>
+                        ACTION.
+                    </div>
+
+                    <p class="small">
+                        Most tokens promise momentum.<br>
+                        $PUSH creates it.
+                    </p>
+
+                </div>
+
+                <div class="image-holder">
+
+                    <img src="logo.jpg" alt="$PUSH visual">
+
+                </div>
+
+            </div>
+
+            <div class="grid" style="margin-top:80px">
+
+                <div class="block">
+                    <h3>Pressure.</h3>
+                    <p class="small">
+                        Markets stall. Narratives fade.
+                        Momentum must be forced.
+                    </p>
+                </div>
+
+                <div class="block">
+                    <h3>Momentum.</h3>
+                    <p class="small">
+                        Progress happens when someone
+                        pushes first.
+                    </p>
+                </div>
+
+                <div class="block">
+                    <h3>Persistence.</h3>
+                    <p class="small">
+                        Every market cycle eventually
+                        rewards forward pressure.
+                    </p>
+                </div>
+
+                <div class="block">
+                    <h3>Execution.</h3>
+                    <p class="small">
+                        Ideas don't move markets.
+                        Action does.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section id="narrative">
+
+        <div class="container">
+
+            <div class="label">THE NARRATIVE</div>
+
+            <p class="small">In crypto, hesitation is expensive.</p>
+
+            <div class="statement">
+                Charts move.<br>
+                Sentiment shifts.<br>
+                Weak hands disappear.
+            </div>
+
+            <p class="statement">
+                But momentum always belongs to
+                those who push.
+            </p>
+
+            <div class="final">
+                $PUSH
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+
+        © PUSH
+
+    </footer>
+    <script>
+
+        function copyCA() {
+
+            const address = "mB4kwy1WdGYGbBwRGqnBXoHLG9kZJmqCG1oaEAxpump";
+
+            navigator.clipboard.writeText(address);
+
+            const btn = document.querySelector(".copy-label");
+
+            btn.innerText = "COPIED";
+
+            setTimeout(() => {
+
+                btn.innerText = "COPY";
+
+            }, 1500);
+
+        }
+
+    </script>
+</body>
+
+</html>
